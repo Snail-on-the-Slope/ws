@@ -1,0 +1,43 @@
+.home__table-container_overflow {
+    // width: auto
+}
+
+.home_item-table,
+table {
+    .table__container {
+        margin: 0;
+    }
+    .table__item {
+        font-size: 14px;
+    }
+    .table__row {
+        width: 100%;
+        .table__row__td {
+            text-overflow: ellipsis;
+            border-right: 1px solid #bdb3e7;
+        }
+        .table__row__td:first-child {
+            border-right: 1px solid #bdb3e7;
+        }
+        .table__row__th_hide,
+        .table__row__td_hide {
+            display: none;
+        }
+    }
+    // .table__row__th,
+    // .table__row__td {
+    //     width: 50%;
+    // }
+}
+
+.app__body__dropdown,
+.dropdown {
+    padding-top: 17%;
+}
+
+.dropdown__input-field,
+.input-field {
+    select {
+        width: 35%;
+    }
+}

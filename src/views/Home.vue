@@ -1,10 +1,10 @@
 <template>
-  <div class="home">
-    <p>Символ: {{symbol}}</p>
-    <hr />
-    <div class="table-container">
-      <Table :data="['Bids', data.bids]" />
-      <Table :data="['Asks', data.asks]" />
+  <div class="app__body__home home">
+    <div class="home__table-container">
+      <div class="home__table-container_overflow">
+        <Table :data="['Bids', data.bids]" />
+        <Table :data="['Asks', data.asks]" />
+      </div>
     </div>
   </div>
 </template>
@@ -15,7 +15,7 @@ import Table from "@/components/Table.vue";
 export default {
   name: "Home",
   data: () => ({
-    symbol: localStorage.symbol,
+    symbol: null,
     data: {
       bids: null,
       asks: null,
@@ -23,13 +23,14 @@ export default {
     socket: null,
   }),
   async created() {
+    this.symbol = this.$store.symbol;
     let temp = await this.$sdk.get(this.symbol);
     this.data.bids = temp.bids.reverse();
     this.data.asks = temp.asks.reverse();
     this.subscribe();
 
     this.$store.$on("newSymbol", (s) => {
-      localStorage.symbol = s;
+      this.$store.symbol = s;
       this.socket.close();
     });
   },
@@ -67,36 +68,3 @@ export default {
   },
 };
 </script>
-
-
-<style scoped lang="scss">
-.home {
-  padding-top: 7%;
-  p {
-    font-size: 20px;
-  }
-  hr {
-    width: 45%;
-    margin-top: 10px;
-    height: 1px;
-    border: 0;
-    border-top: 1.5px solid #bdb3e7;
-  }
-  .table-container {
-    display: flex;
-    margin-top: 2%;
-    margin-left: 3%;
-    height: 60vh;
-    overflow-y: auto;
-    ::-webkit-scrollbar {
-      margin-top: 5%;
-    }
-  }
-  @media screen and (max-width: 900px) {
-    padding-top: 10%;
-  }
-  @media screen and (max-width: 680px) {
-    padding-top: 17%;
-  }
-}
-</style>

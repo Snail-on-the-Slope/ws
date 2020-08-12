@@ -1,4 +1,3 @@
 module.exports = {
-    publicPath: process.env.NODE_ENV === 'production' ?
-        '/ws_binance/' : '/'
-}
+    publicPath: process.env.NODE_ENV === "production" ? "/ws/" : "/",
+};
